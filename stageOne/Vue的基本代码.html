@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+
+<!--Vue实例控制的这个元素区域，就是我们的V-->
+<div id="app">
+    <p v-cloak>{{ message }}</p>
+    <button type="button" v-for="(i,index) in 10" @click="moveNext(index)" ::key="index">{{index}}</button>
+</div>
+
+<button type="button" @click="alert(1)" ::key="i">123</button>
+
+<div id="app2">
+    <!--使用v-cloak能够解决 插值表达式闪烁的问题-->
+    <p v-cloak>{{ msg }}</p>
+    <!--默认 v-text 是没有闪烁问题的 它会覆盖元素中原本的内容，但是插值表达式 只会替换自己
+    的这个占位符，不会把整个元素内容清空-->
+    <h4 v-text="msg"></h4>
+    <div>{{msg2}}</div>
+    <div v-text="msg2"></div>
+
+    <div v-html="msg2"></div>
+
+    <!-- v-bind是Vue中提供的用于绑定属性的指令 简写为 :要绑定的属性 v-bind可以写合法的JS表达式-->
+    <!--<input type="button" value="按钮" v-bind:title="mytitle+'123'">-->
+    <!-- v-on 事件绑定机制 缩写是 @-->
+    <!--<input type="button" v-on:click="alert('Hello')" value="按钮" :title="mytitle+'123'">-->
+
+    <!--<input type="button" value="按钮" v-on:click="show">-->
+    <input type="button" value="按钮" @click="show">
+</div>
+
+<script src="../public/vueJS/vue.js"></script>
+<script>
+    /*
+    1.创建一个Vue的实例
+    2.导入包之后，在浏览器的内存中就多了一个Vue的构造函数
+     */
+    //-----------我们new出来的这个vm对象，就是MVVM的vm调度者
+    var app1 = new Vue({
+        el:"#app",
+        //这里的data 就是MVVM中的M，专门用来保存每个页面的数据
+        data:{
+            count:0,
+            message:"Hello Wolrd!"
+        },
+        methods:{
+            moveNext(index){
+                console.log(index);
+                if(index==1){
+
+                }else if(index==2){
+
+                }
+            },
+            add(){
+                this.count++;
+            }
+        }
+    });
+
+    var app2 = new Vue({
+        el:"#app2",
+        data:{
+            msg:"Hello World!",
+            msg2:'<h1>哈哈我是一个h1，我大，我骄傲！</h1>',
+            mytitle:'这是一个自定义的title'
+        },
+        methods:{//这个methods属性定义了当前Vued实例所有可用的方法
+            show:function(){
+                alert('Hello World!');
+            }
+        }
+    })
+</script>
+</body>
+</html>

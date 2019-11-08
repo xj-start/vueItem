@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Document</title>
+    <script src="../public/vueJS/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="app">
+    <!-- 对象就是无序键值对的集合 -->
+    <h4 :style="[styleObj1,styleObj2]">这是一个h4</h4>
+</div>
+
+<script type="text/javascript">
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            styleObj1:{color:'red','font-weight':200,'font-size':20,background:'yellow'},
+            styleObj2:{'font-style':'italic'}
+        },
+        methods: {}
+    })
+</script>
+</body>
+</html>
